@@ -164,8 +164,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
     # replace the placeholders in the template_page string with the title and body we've extracted.
     template_page = template_page.replace("{{ Title }}", title_string)
     template_page = template_page.replace("{{ Content }}", html_string)
-    template_page = template_page.replace('href="/', 'href="{basepath}')
-    template_page = template_page.replace('src="/', 'src="{basepath}')
+    template_page = template_page.replace('href="/', f'href="{basepath}')
+    template_page = template_page.replace('src="/', f'src="{basepath}')
     
     # write the string to destination path
     dest_directory_path = os.path.dirname(dest_path)
