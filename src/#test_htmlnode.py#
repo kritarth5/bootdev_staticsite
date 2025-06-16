@@ -1,0 +1,29 @@
+# imports to file
+import unittest
+from htmlnode import HTMLNode
+
+# actual code
+class TestHTMLNode(unittest.TestCase):
+    def test_tags(self):
+        html1 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        html2 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        self.assertEqual(html1.tag,html2.tag)
+
+    def test_value(self):
+        html1 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        html2 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        self.assertEqual(html1.value,html2.value)
+
+    def test_children(self):
+        html1 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        html2 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        self.assertEqual(html1.children,html2.children)
+
+    def test_props(self):
+        html1 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        html2 = HTMLNode("div", 10, ["I"], props={"h":"hello"})
+        self.assertEqual(html1.props,html2.props)
+        
+    
+        
+
