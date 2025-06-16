@@ -1,9 +1,0 @@
-from textnode import TextNode, TextType
-
-def main():
-    Node = TextNode("This is the text", TextType.LINKS)
-    print(Node)
-
-
-if __name__ == "__main__":
-    main()
