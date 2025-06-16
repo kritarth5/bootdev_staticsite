@@ -142,7 +142,7 @@ def extract_title(markdown):
     else:
         raise ValueError("No Title Header Found")
                           
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     """ Generate one html page from a markdown to html"""
     # Print which page is being generated
     print(f"generating page from {from_path} to destination {dest_path} using a template {template_path}")
@@ -164,7 +164,9 @@ def generate_page(from_path, template_path, dest_path):
     # replace the placeholders in the template_page string with the title and body we've extracted.
     template_page = template_page.replace("{{ Title }}", title_string)
     template_page = template_page.replace("{{ Content }}", html_string)
-
+    template_page = template_page.replace('href="/', 'href="{basepath}')
+    template_page = template_page.replace('src="/', 'src="{basepath}')
+    
     # write the string to destination path
     dest_directory_path = os.path.dirname(dest_path)
 
@@ -177,7 +179,7 @@ def generate_page(from_path, template_path, dest_path):
         file.write(template_page)
             
         
-def generate_page_recursively(from_path, template_path, dest_path):
+def generate_page_recursively(from_path, template_path, dest_path, basepath):
     """ Copy /content contents into /public for website recursively"""
     # Print what's happening:
     # TODO: Make the print output nicer. 
@@ -201,7 +203,7 @@ def generate_page_recursively(from_path, template_path, dest_path):
             os.makedirs(os.path.dirname(new_dest_path), exist_ok=True)
 
             # generate html from markdown
-            generate_page(new_source_path, template_path, new_dest_path)
+            generate_page(new_source_path, template_path, new_dest_path, basepath)
                 
 
         # If filepath is actually a directory, recurse:
@@ -211,7 +213,7 @@ def generate_page_recursively(from_path, template_path, dest_path):
             os.makedirs(new_dest_path, exist_ok=True)
 
             # recurse and call the function again:
-            generate_page_recursively(new_source_path, template_path, new_dest_path)
+            generate_page_recursively(new_source_path, template_path, new_dest_path, basepath)
 
         # if file exists but it isn't a markdown file, continue
         else:

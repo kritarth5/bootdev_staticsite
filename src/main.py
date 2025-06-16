@@ -1,11 +1,18 @@
 import os
 import shutil
-from markdown_to_html import generate_page, generate_page_recursively, is_markdown
+from markdown_to_html import generate_page, generate_page_recursively,is_markdown
+import sys
 
 def main():
+    # grab arguments for github pages build:
+    if len(sys.argv) >= 2:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
+    
     # define paths
     # There should be someway to pass these variables to main as well. 
-    public_path = "/Users/kjha/code/bootdev/bootdev_staticsite/public"
+    public_path = "/Users/kjha/code/bootdev/bootdev_staticsite/docs"
     static_path = "/Users/kjha/code/bootdev/bootdev_staticsite/static"
     
     # call function to copy and paste from source to destination
@@ -14,9 +21,9 @@ def main():
     # generate a page as an example
     from_page = "/Users/kjha/code/bootdev/bootdev_staticsite/content"
     template_page = "/Users/kjha/code/bootdev/bootdev_staticsite/template.html"
-    destination_page = "/Users/kjha/code/bootdev/bootdev_staticsite/public"
+    destination_page = "/Users/kjha/code/bootdev/bootdev_staticsite/docs"
 
-    generate_page_recursively(from_page, template_page, destination_page)
+    generate_page_recursively(from_page, template_page, destination_page, basepath)
 
 def copy_source_destination(static_path:str, public_path:str) -> None:
 
